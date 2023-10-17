@@ -40,9 +40,9 @@ public class FinanceTracker {
         scanner.nextLine();
 
         if (categorizeTransaction(description)) {
-            totalIncome += amount; // Modify the global variable directly
+            totalIncome += amount; 
         } else {
-            totalExpenses += amount; // Modify the global variable directly
+            totalExpenses += amount; 
         }
 
         transactions.add(description);
