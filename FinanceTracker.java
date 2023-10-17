@@ -13,7 +13,8 @@ public class FinanceTracker {
             System.out.println("Personal Finance Tracker");
             System.out.println("1. Add Transaction");
             System.out.println("2. Calculate Savings");
-            System.out.println("3. Exit");
+            System.out.println("3. Display Transaction History");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -23,6 +24,8 @@ public class FinanceTracker {
             } else if (choice == 2) {
                 calculateSavings();
             } else if (choice == 3) {
+                displayTransactions();
+            } else if (choice == 4) {
                 System.out.println("Exiting the Fintracker");
                 break;
             } else {
@@ -47,6 +50,8 @@ public class FinanceTracker {
 
         transactions.add(description);
         System.out.println("Transaction added successfully.");
+        System.out.println();
+
     }
 
     public static boolean categorizeTransaction(String description) {
@@ -59,5 +64,15 @@ public class FinanceTracker {
         System.out.println("Total Income: " + totalIncome);
         System.out.println("Total Expenses: " + totalExpenses);
         System.out.println("Savings: " + savings);
+        System.out.println();
+    }
+
+    public static void displayTransactions() {
+        System.out.println("Transaction History: ");
+        for (String transaction : transactions) {
+            System.out.println(transaction);
+            
+        }
+        System.out.println();
     }
 }
