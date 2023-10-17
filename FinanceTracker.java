@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FinanceTracker {
-    public static void main(String[] args) {
-        ArrayList<String> transactions = new ArrayList<>();
-        double totalIncome = 0;
-        double totalExpenses = 0;
+    private static double totalIncome = 0; // Declare as class-level variable
+    private static double totalExpenses = 0; // Declare as class-level variable
+    private static ArrayList<String> transactions = new ArrayList<>(); // Class-level variable
 
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -16,11 +16,12 @@ public class FinanceTracker {
             System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  
+            scanner.nextLine();
+
             if (choice == 1) {
-                addTransaction(transactions, totalIncome, totalExpenses);
+                addTransaction();
             } else if (choice == 2) {
-                calculateSavings(totalIncome, totalExpenses);
+                calculateSavings();
             } else if (choice == 3) {
                 System.out.println("Exiting the Fintracker");
                 break;
@@ -30,7 +31,7 @@ public class FinanceTracker {
         }
     }
 
-    public static void addTransaction(ArrayList<String> transactions, double totalIncome, double totalExpenses) {
+    public static void addTransaction() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter description: ");
         String description = scanner.nextLine();
@@ -38,35 +39,25 @@ public class FinanceTracker {
         double amount = scanner.nextDouble();
         scanner.nextLine();
 
-        TransactionType type = categorizeTransaction(description);
+        if (categorizeTransaction(description)) {
+            totalIncome += amount; // Modify the global variable directly
+        } else {
+            totalExpenses += amount; // Modify the global variable directly
+        }
 
         transactions.add(description);
-
-        if (type == TransactionType.INCOME) {
-            totalIncome += amount;
-        } else {
-            totalExpenses += amount;
-        }
         System.out.println("Transaction added successfully.");
     }
 
-    public static TransactionType categorizeTransaction(String description) {
+    public static boolean categorizeTransaction(String description) {
         String desc = description.toLowerCase();
-        if (desc.contains("salary") || desc.contains("income")) {
-            return TransactionType.INCOME;
-        } else {
-            return TransactionType.EXPENSE;
-        }
+        return desc.contains("salary") || desc.contains("income");
     }
 
-    public static void calculateSavings(double totalIncome, double totalExpenses) {
+    public static void calculateSavings() {
         double savings = totalIncome - totalExpenses;
         System.out.println("Total Income: " + totalIncome);
         System.out.println("Total Expenses: " + totalExpenses);
         System.out.println("Savings: " + savings);
     }
-}
-
-enum TransactionType {
-    INCOME, EXPENSE
 }
