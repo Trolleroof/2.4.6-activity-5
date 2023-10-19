@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FinanceTracker {
-    private static double totalIncome = 0; // Declare as class-level variable
-    private static double totalExpenses = 0; // Declare as class-level variable
-    private static ArrayList<String> transactions = new ArrayList<>(); // Class-level variable
+    private static double totalIncome = 0; 
+    private static double totalExpenses = 0; 
+    private static ArrayList<String> transactions = new ArrayList<>(); 
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
